@@ -23,7 +23,7 @@ import rehypeUnwrapImages from "rehype-unwrap-images";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://kaisanre.github.io",
+	site: "https://kaisanre.github.io/phirse/",
   base: "/phirse",
 	image: {
 		domains: ["webmention.io"],
