@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -14,30 +14,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: pnpm
+
+      - name: Install system dependencies (Fix sharp issue)
+        run: sudo apt-get update && sudo apt-get install -y libvips
 
       - name: Install dependencies
-        run: |
-          corepack enable
-          pnpm install --shamefully-hoist
+        run: pnpm install --ignore-scripts
 
-      - name: Fix sharp module issue
-        run: |
-          pnpm rebuild sharp
-          pnpm install --platform=linux --arch=x64 sharp
-
-      - name: Build the Astro site
+      - name: Build Astro site
         run: pnpm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # ✅ Fixed deprecated version issue
+      - name: Upload build output
+        uses: actions/upload-pages-artifact@v2
         with:
           path: dist
 
