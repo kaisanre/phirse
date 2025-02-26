@@ -23,7 +23,7 @@ import rehypeUnwrapImages from "rehype-unwrap-images";
 
 // https://astro.build/config
 export default defineConfig({
-site: "https://kaisanre.github.io/phirse",
+site: "https://kaisanre.github.io",
   base: "/phirse/", 
   output: "static", 
 	image: {
